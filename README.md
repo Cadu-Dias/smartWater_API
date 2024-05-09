@@ -11,8 +11,14 @@ The database stores data emitted by various sensors, making it a valuable resour
   npm install
   npm run dev
  ```
- OBS: You have to create and configure a ".env" for the API work correctly. There is a ".env.example" containing the name of the environment variables that you need to create
-
+ OBS: You have to create and configure a ".env" for the API work correctly. There is a ".env.example" containing the name of the environment variables that you need to create. Below there are the values that are being used to connect to the Database
+ ```
+INFLUX_URL=https://us-east-1-1.aws.cloud2.influxdata.com
+TOKEN=p7OOpKDo-WgkJ1C21aLMLTdaw-_6GIe-1UtZLrc0fCeuhqz7OGRUxA5-TYGn9_9vk4gw86XfEMzHsxu-wqmUcw==
+BUCKET=smartcampusmaua
+ORGANIZATION=802a670740d9e197
+PORT=3000
+ ``` 
 ## Current Routes
  
  These are the current routes that were made in the API, some changes might happen
