@@ -36,7 +36,7 @@ app.get("/api/smartlights", async (req, res) =>  {
     res.send(teste)
 })
 
-app.get("/api//watertanklevel", async (req, res) =>  {
+app.get("/api/watertanklevel", async (req, res) =>  {
     const teste = {}
     const queryApi = client.getQueryApi(org, bucket);
 
