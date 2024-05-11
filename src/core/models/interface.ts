@@ -101,3 +101,8 @@ export interface HidrometerNodeField {
     txInfo_dataRate_bandwidth: "125",
     txInfo_dataRate_modulation: "LORA"
 }
+
+export interface User {
+    username: string
+    password: string
+}

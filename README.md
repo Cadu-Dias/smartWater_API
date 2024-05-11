@@ -18,6 +18,7 @@ TOKEN=p7OOpKDo-WgkJ1C21aLMLTdaw-_6GIe-1UtZLrc0fCeuhqz7OGRUxA5-TYGn9_9vk4gw86XfEM
 BUCKET=smartcampusmaua
 ORGANIZATION=802a670740d9e197
 PORT=3000
+ACCESS_TOKEN_SECRET=smartWaterSecretAPIkey
  ``` 
 ## Current Routes
  
