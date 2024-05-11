@@ -24,6 +24,9 @@ ACCESS_TOKEN_SECRET=smartWaterSecretAPIkey
  
  These are the current routes that were made in the API, some changes might happen
 
+    - /api/login (POST)
+      - Needs to send a User object { username: string, password: string } in the Req Body
+
     - /api/smartlights (GET)
     - /api/watertanklevel (GET)
     - /api/hidrometer (GET)
