@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Hidrometer, HidrometerNodeField, SmartLight, SmartLightNodeField, User, WaterTank, WaterTankNodeField } from "./core/models/interface";
+import { ArtesianWell, ArtesianWellNodeField, Hidrometer, HidrometerNodeField, SmartLight, SmartLightNodeField, User, WaterTank, WaterTankNodeField } from "./core/models/interface";
 import express from 'express';
 import dotenv from 'dotenv';
 import { InfluxDB, flux } from '@influxdata/influxdb-client';
@@ -157,6 +157,45 @@ app.get("/api/hidrometer", ensureToken, async (req : Request, res : Response) =>
         })
         res.status(200)
         res.send(hidrometerByNode)
+    })
+})
+
+app.get("/api/artesianWell", ensureToken, async (req : Request, res : Response) =>  {
+
+    jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
+        if(err) {
+            return res.status(401).json({
+                message: "This token does not exist!",
+                error: err
+            })
+        }
+        const artesianByNode : ArtesianWell = {}
+        const queryApi = client.getQueryApi(org);
+    
+        const query = flux`from(bucket: "${bucket}")
+        |> range(start: -20m) 
+        |> filter(fn: (r) => r._measurement == "Hidrometer")
+        |> limit(n: 10)`
+        const result : ArtesianWellNodeField[] =  await queryApi.collectRows(query);
+        result.map((ArtesianWellNodeField) => {
+            const artesianWellValue = {
+                fieldValue: ArtesianWellNodeField._value,
+                time: ArtesianWellNodeField._time,
+                start: ArtesianWellNodeField._start,
+                stop: ArtesianWellNodeField._stop
+            }
+            if(!artesianByNode[ArtesianWellNodeField.nodeName]) {
+                artesianByNode[ArtesianWellNodeField.nodeName] = {}
+            }
+            if(!artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field]) {
+                artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field] = [artesianWellValue]
+            }
+            else {
+                artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field].push(artesianWellValue)
+            }
+        })
+        res.status(200)
+        res.send(artesianByNode)
     })
 })
 
