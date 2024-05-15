@@ -12,6 +12,11 @@ const app = express()
 dotenv.config({ path: './.env' }); 
 app.use(express.json())
 app.use(cors())
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 const port : string = process.env.PORT!;
 const url : string = process.env.INFLUX_URL!
@@ -83,7 +88,7 @@ app.get("/api/smartlights", ensureToken, (req : Request, res : Response) =>  {
     })
 })
 
-app.get("/api/watertanklevel", ensureToken, async (req : Request, res : Response) =>  {
+app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
     jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
         if(err) {
             return res.status(401).json({
