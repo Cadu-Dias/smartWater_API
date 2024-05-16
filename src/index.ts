@@ -59,12 +59,14 @@ app.get("/api/smartlights",  /*ensureToken*/ async (req : Request, res : Respons
                 error: err
             })
         }*/
+        let interval = '60'
+        if(req.query.interval) interval = req.query.interval as string
 
         let smartLightsByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
-        |> range(start: -1h) 
+        |> range(start: -${interval}m) 
         |> filter(fn: (r) => r._measurement == "SmartLight")
         |> limit(n: 10)`
         const result : TableNodeField[] = await queryApi.collectRows(query);
@@ -83,11 +85,14 @@ app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
                 error: err
             })
         }*/
+        let interval = '60'
+        if(req.query.interval) interval = req.query.interval as string
+
         let waterTankLevelByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
-        |> range(start: -20m) 
+        |> range(start: -${interval}m) 
         |> filter(fn: (r) => r._measurement == "WaterTankLavel")
         |> limit(n: 10)`
         const result : TableNodeField[] = await queryApi.collectRows(query);
@@ -107,11 +112,14 @@ app.get("/api/hidrometer", /*ensureToken*/ async (req : Request, res : Response)
                 error: err
             })
         }*/
+        let interval = '60'
+        if(req.query.interval) interval = req.query.interval as string
+
         let hidrometerByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
-        |> range(start: -20m) 
+        |> range(start: -${interval}m) 
         |> filter(fn: (r) => r._measurement == "Hidrometer")
         |> limit(n: 10)`
         const result : TableNodeField[] =  await queryApi.collectRows(query);
@@ -131,11 +139,14 @@ app.get("/api/artesianWell", /*ensureToken*/ async (req : Request, res : Respons
                 error: err
             })
         }*/
+        let interval = '60'
+        if(req.query.interval) interval = req.query.interval as string
+
         let artesianByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
-        |> range(start: -1h) 
+        |> range(start: -${interval}m) 
         |> filter(fn: (r) => r._measurement == "ArtesianWell")
         |> limit(n: 10)`
         const result : TableNodeField[] =  await queryApi.collectRows(query);

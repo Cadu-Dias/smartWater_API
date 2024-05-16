@@ -28,7 +28,18 @@ ACCESS_TOKEN_SECRET=smartWaterSecretAPIkey
       - Needs to send a User object { username: string, password: string } in the Req Body
 
     - /api/smartlights (GET)
+      - /api/smartlights?interval=x  (GET)
+      - x is in Minutes
+  
     - /api/watertanklevel (GET)
+      - /api/watertanklevel?interval=x  (GET)
+      - x is in Minutes
+  
     - /api/hidrometer (GET)
-    
+      - /api/hidrometer?interval=x  (GET)
+      - x is in Minutes
+  
+    - /api/artesianWell
+      - /api/artesianWell?interval=x  (GET)
+      - x is in Minutes    
     
