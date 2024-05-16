@@ -24,22 +24,22 @@ ACCESS_TOKEN_SECRET=smartWaterSecretAPIkey
  
  These are the current routes that were made in the API, some changes might happen
 
-    - /api/login (POST)
+    - /api/timeseries/v0.5/login/user(POST)
       - Needs to send a User object { username: string, password: string } in the Req Body
 
-    - /api/smartlights (GET)
-      - /api/smartlights?interval=x  (GET)
+    - /api/timeseries/v0.5/smartcampusmaua/SmartLights (GET)
+      - /api/timeseries/v0.5/smartcampusmaua/SmartLights?interval=x  (GET)
       - x is in Minutes
   
-    - /api/watertanklevel (GET)
-      - /api/watertanklevel?interval=x  (GET)
+    - /api/timeseries/v0.5/smartcampusmaua/WaterTanks (GET)
+      - /api/timeseries/v0.5/smartcampusmaua/WaterTank?interval=x  (GET)
       - x is in Minutes
   
-    - /api/hidrometer (GET)
-      - /api/hidrometer?interval=x  (GET)
+    - /api/timeseries/v0.5/smartcampusmaua/Hidrometers (GET)
+      - /api/timeseries/v0.5/smartcampusmaua/Hidrometer?interval=x  (GET)
       - x is in Minutes
   
-    - /api/artesianWell
-      - /api/artesianWell?interval=x  (GET)
+    - /api/timeseries/v0.5/smartcampusmaua/ArtesianWell
+      - /api/timeseries/v0.5/smartcampusmaua/ArtesianWell?interval=x  (GET)
       - x is in Minutes    
     
