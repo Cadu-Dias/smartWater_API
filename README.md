@@ -20,6 +20,12 @@ ORGANIZATION=smartWater
 PORT=3000
 ACCESS_TOKEN_SECRET=smartWaterSecretAPIkey
  ``` 
+## API Documentation
+
+  <p>For the project it was created a documentation by using the library <b><i>swagger-ui-express</i></b> that with a 'swagger.json' archive possibilitate a creation of a HTML Page with the routes, models, shcemes, etc.</p>
+
+  <p>To access the API documentation you need to <b>RUN/START</b> the project and in a Navigator put the link http://localhost:3000/api/timeseries/v0.5/swagger/</p>
+
 ## Current Routes
  
  These are the current routes that were made in the API, some changes might happen
