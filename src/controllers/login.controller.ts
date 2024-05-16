@@ -2,11 +2,11 @@ import express from 'express'
 import { Response, Request } from 'express'
 import { User } from '../core/models/interface'
 import jwt from 'jsonwebtoken';
+import db from '../db/db.json';
 
 const router = express.Router()
-const db = require('../db/db.json')
 
-router.post('/api/login', async (req: Request, res: Response) => {
+router.post('/', (req: Request, res: Response) => {
 
     const { username, password } = req.body
 
@@ -16,8 +16,7 @@ router.post('/api/login', async (req: Request, res: Response) => {
         })
     }
 
-    const users : User[] = await db.users
-        
+    const users : User[] =  db.users
     if(!users.find(user => user.username === username && user.password === password)) {
         return res.status(401).json({
             message: "This User is Unauthorized"
