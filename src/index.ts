@@ -50,14 +50,14 @@ app.post('/api/login', async (req: Request, res: Response) => {
     })
 })
 
-app.get("/api/smartlights", ensureToken, (req : Request, res : Response) =>  {
-    jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
+app.get("/api/smartlights",  /*ensureToken*/ async (req : Request, res : Response) =>  {
+    /*jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
         if(err) {
             return res.status(401).json({
                 message: "This token does not exist!",
                 error: err
             })
-        }
+        }*/
 
         const smartLightsByNode : SmartLight = {}
         const queryApi = client.getQueryApi(org);
@@ -85,17 +85,17 @@ app.get("/api/smartlights", ensureToken, (req : Request, res : Response) =>  {
         })
         res.status(200)
         res.send(smartLightsByNode)
-    })
+    //})
 })
 
 app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
-    jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
+    /*jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
         if(err) {
             return res.status(401).json({
                 message: "This token does not exist!",
                 error: err
             })
-        }
+        }*/
         const waterTankLevelByNode : WaterTank = {}
         const queryApi = client.getQueryApi(org);
     
@@ -123,18 +123,18 @@ app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
         })
         res.status(200)
         res.send(waterTankLevelByNode)
-    })
+    //})
 })
 
-app.get("/api/hidrometer", ensureToken, async (req : Request, res : Response) =>  {
+app.get("/api/hidrometer", /*ensureToken*/ async (req : Request, res : Response) =>  {
 
-    jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
+    /*jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
         if(err) {
             return res.status(401).json({
                 message: "This token does not exist!",
                 error: err
             })
-        }
+        }*/
         const hidrometerByNode : Hidrometer = {}
         const queryApi = client.getQueryApi(org);
     
@@ -162,18 +162,18 @@ app.get("/api/hidrometer", ensureToken, async (req : Request, res : Response) =>
         })
         res.status(200)
         res.send(hidrometerByNode)
-    })
+    //})
 })
 
-app.get("/api/artesianWell", ensureToken, async (req : Request, res : Response) =>  {
+app.get("/api/artesianWell", /*ensureToken*/ async (req : Request, res : Response) =>  {
 
-    jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
+    /*jwt.verify(req.headers["authorization"]!, process.env.ACCESS_TOKEN_SECRET!, async (err, data) => {
         if(err) {
             return res.status(401).json({
                 message: "This token does not exist!",
                 error: err
             })
-        }
+        }*/
         const artesianByNode : ArtesianWell = {}
         const queryApi = client.getQueryApi(org);
     
@@ -201,7 +201,7 @@ app.get("/api/artesianWell", ensureToken, async (req : Request, res : Response) 
         })
         res.status(200)
         res.send(artesianByNode)
-    })
+    //})
 })
 
 app.listen(port, () => {
