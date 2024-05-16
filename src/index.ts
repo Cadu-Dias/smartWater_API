@@ -59,8 +59,8 @@ app.get("/api/smartlights",  /*ensureToken*/ async (req : Request, res : Respons
                 error: err
             })
         }*/
-        let interval = '60'
-        if(req.query.interval) interval = req.query.interval as string
+        let interval = 60
+        if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let smartLightsByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
@@ -69,6 +69,7 @@ app.get("/api/smartlights",  /*ensureToken*/ async (req : Request, res : Respons
         |> range(start: -${interval}m) 
         |> filter(fn: (r) => r._measurement == "SmartLight")
         |> limit(n: 10)`
+        console.log(query)
         const result : TableNodeField[] = await queryApi.collectRows(query);
         
         smartLightsByNode = generateTableObject(result)
@@ -85,8 +86,8 @@ app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
                 error: err
             })
         }*/
-        let interval = '60'
-        if(req.query.interval) interval = req.query.interval as string
+        let interval = 60
+        if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let waterTankLevelByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
@@ -112,8 +113,8 @@ app.get("/api/hidrometer", /*ensureToken*/ async (req : Request, res : Response)
                 error: err
             })
         }*/
-        let interval = '60'
-        if(req.query.interval) interval = req.query.interval as string
+        let interval = 60
+        if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let hidrometerByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
@@ -139,8 +140,8 @@ app.get("/api/artesianWell", /*ensureToken*/ async (req : Request, res : Respons
                 error: err
             })
         }*/
-        let interval = '60'
-        if(req.query.interval) interval = req.query.interval as string
+        let interval = 60
+        if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let artesianByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
