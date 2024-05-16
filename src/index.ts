@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import { ArtesianWell, ArtesianWellNodeField, Hidrometer, HidrometerNodeField, SmartLight, SmartLightNodeField, User, WaterTank, WaterTankNodeField } from "./core/models/interface";
+import { NodeAtributes, User, TableNodeField } from "./core/models/interface";
 import express from 'express';
 import dotenv from 'dotenv';
 import { InfluxDB, flux } from '@influxdata/influxdb-client';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
-import { ensureToken } from "./core/functions/functions";
+import { ensureToken } from "./core/functions/middleware";
+import { generateTableObject } from "./core/functions/function";
 
 const db = require('./db/db.json')
 const app = express()
@@ -59,30 +60,16 @@ app.get("/api/smartlights",  /*ensureToken*/ async (req : Request, res : Respons
             })
         }*/
 
-        const smartLightsByNode : SmartLight = {}
+        let smartLightsByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
         |> range(start: -1h) 
         |> filter(fn: (r) => r._measurement == "SmartLight")
         |> limit(n: 10)`
-        const result : SmartLightNodeField[] = await queryApi.collectRows(query);
-        result.map((smartLightNodeField) => {
-            const smartlightsValue = {
-                fieldValue: smartLightNodeField._value,
-                time: smartLightNodeField._time,
-                start: smartLightNodeField._start,
-                stop: smartLightNodeField._stop
-            }
-            if(!smartLightsByNode[smartLightNodeField.nodeName]) {
-                smartLightsByNode[smartLightNodeField.nodeName] = {}
-            }
-            if(!smartLightsByNode[smartLightNodeField.nodeName][smartLightNodeField._field]) {
-                smartLightsByNode[smartLightNodeField.nodeName][smartLightNodeField._field] = [smartlightsValue]
-            } else {
-                smartLightsByNode[smartLightNodeField.nodeName][smartLightNodeField._field].push(smartlightsValue)
-            }
-        })
+        const result : TableNodeField[] = await queryApi.collectRows(query);
+        
+        smartLightsByNode = generateTableObject(result)
         res.status(200)
         res.send(smartLightsByNode)
     //})
@@ -96,31 +83,16 @@ app.get("/api/watertanklevel", async (req : Request, res : Response) =>  {
                 error: err
             })
         }*/
-        const waterTankLevelByNode : WaterTank = {}
+        let waterTankLevelByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
         |> range(start: -20m) 
         |> filter(fn: (r) => r._measurement == "WaterTankLavel")
         |> limit(n: 10)`
-        const result : WaterTankNodeField[] = await queryApi.collectRows(query);
-        result.map((waterTankNodeField) => {
-            const waterTankValue = {
-                fieldValue: waterTankNodeField._value,
-                time: waterTankNodeField._time,
-                start: waterTankNodeField._start,
-                stop: waterTankNodeField._stop
-            }
-            if(!waterTankLevelByNode[waterTankNodeField.nodeName]) {
-                waterTankLevelByNode[waterTankNodeField.nodeName] = {}
-            }
-            if(!waterTankLevelByNode[waterTankNodeField.nodeName][waterTankNodeField._field]) {
-               
-                waterTankLevelByNode[waterTankNodeField.nodeName][waterTankNodeField._field] = [waterTankValue]
-            }else {
-                waterTankLevelByNode[waterTankNodeField.nodeName][waterTankNodeField._field].push(waterTankValue)
-            }
-        })
+        const result : TableNodeField[] = await queryApi.collectRows(query);
+        
+        waterTankLevelByNode = generateTableObject(result)
         res.status(200)
         res.send(waterTankLevelByNode)
     //})
@@ -135,31 +107,16 @@ app.get("/api/hidrometer", /*ensureToken*/ async (req : Request, res : Response)
                 error: err
             })
         }*/
-        const hidrometerByNode : Hidrometer = {}
+        let hidrometerByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
         |> range(start: -20m) 
         |> filter(fn: (r) => r._measurement == "Hidrometer")
         |> limit(n: 10)`
-        const result : HidrometerNodeField[] =  await queryApi.collectRows(query);
-        result.map((hidrometerNodeField) => {
-            const hidrometerValue = {
-                fieldValue: hidrometerNodeField._value,
-                time: hidrometerNodeField._time,
-                start: hidrometerNodeField._start,
-                stop: hidrometerNodeField._stop
-            }
-            if(!hidrometerByNode[hidrometerNodeField.nodeName]) {
-                hidrometerByNode[hidrometerNodeField.nodeName] = {}
-            }
-            if(!hidrometerByNode[hidrometerNodeField.nodeName][hidrometerNodeField._field]) {
-                hidrometerByNode[hidrometerNodeField.nodeName][hidrometerNodeField._field] = [hidrometerValue]
-            }
-            else {
-                hidrometerByNode[hidrometerNodeField.nodeName][hidrometerNodeField._field].push(hidrometerValue)
-            }
-        })
+        const result : TableNodeField[] =  await queryApi.collectRows(query);
+        
+        hidrometerByNode = generateTableObject(result)
         res.status(200)
         res.send(hidrometerByNode)
     //})
@@ -174,31 +131,16 @@ app.get("/api/artesianWell", /*ensureToken*/ async (req : Request, res : Respons
                 error: err
             })
         }*/
-        const artesianByNode : ArtesianWell = {}
+        let artesianByNode : NodeAtributes = {}
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
         |> range(start: -1h) 
         |> filter(fn: (r) => r._measurement == "ArtesianWell")
         |> limit(n: 10)`
-        const result : ArtesianWellNodeField[] =  await queryApi.collectRows(query);
-        result.map((ArtesianWellNodeField) => {
-            const artesianWellValue = {
-                fieldValue: ArtesianWellNodeField._value,
-                time: ArtesianWellNodeField._time,
-                start: ArtesianWellNodeField._start,
-                stop: ArtesianWellNodeField._stop
-            }
-            if(!artesianByNode[ArtesianWellNodeField.nodeName]) {
-                artesianByNode[ArtesianWellNodeField.nodeName] = {}
-            }
-            if(!artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field]) {
-                artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field] = [artesianWellValue]
-            }
-            else {
-                artesianByNode[ArtesianWellNodeField.nodeName][ArtesianWellNodeField._field].push(artesianWellValue)
-            }
-        })
+        const result : TableNodeField[] =  await queryApi.collectRows(query);
+        
+        artesianByNode = generateTableObject(result)
         res.status(200)
         res.send(artesianByNode)
     //})

@@ -13,3 +13,4 @@ export function ensureToken(req: Request, res: Response, next : NextFunction) {
         message: "The Authorization Bearer Token is missing!"
     })
 }
+
