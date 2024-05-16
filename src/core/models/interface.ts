@@ -2,7 +2,7 @@ export interface NodeAtributes {
     [nodeName: string] :{
         [field: string] : {
             fieldValue: string | number,
-            time: string,
+            timestamp: string,
             start: string,
             stop: string
         }[]}

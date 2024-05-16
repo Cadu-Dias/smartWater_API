@@ -5,7 +5,7 @@ export function generateTableObject(result :TableNodeField[]) {
     result.map((nodeField) => {
         const fieldValue = {
             fieldValue: nodeField._value,
-            time: nodeField._time,
+            timestamp: nodeField._time,
             start: nodeField._start,
             stop: nodeField._stop
         }

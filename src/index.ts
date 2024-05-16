@@ -27,15 +27,15 @@ const hidrometerRoute = require('./controllers/hidrometer.controller')
 const artesianWellRoute = require('./controllers/artesianwell.controller')
 
 
-app.use('/api/login', loginRoute)
+app.use('/api/timeseries/v0.5/login/user', loginRoute)
 
-app.use('/api/smartlights', smartLightRoute)
+app.use('/api/timeseries/v0.5/smartcampusmaua/SmartLights', smartLightRoute)
 
-app.use('/api/watertanklevel', waterTankRoute)
+app.use('/api/timeseries/v0.1/smartcampusmaua/WaterTank', waterTankRoute)
 
-app.use('/api/hidrometer', hidrometerRoute)
+app.use('/api/timeseries/v0.1/smartcampusmaua/Hidrometer', hidrometerRoute)
 
-app.use('/api/artesianwell', artesianWellRoute)
+app.use('/api/timeseries/v0.1/smartcampusmaua/ArtesianWell', artesianWellRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
