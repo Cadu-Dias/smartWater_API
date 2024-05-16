@@ -178,8 +178,8 @@ app.get("/api/artesianWell", /*ensureToken*/ async (req : Request, res : Respons
         const queryApi = client.getQueryApi(org);
     
         const query = flux`from(bucket: "${bucket}")
-        |> range(start: -20m) 
-        |> filter(fn: (r) => r._measurement == "Hidrometer")
+        |> range(start: -1h) 
+        |> filter(fn: (r) => r._measurement == "ArtesianWell")
         |> limit(n: 10)`
         const result : ArtesianWellNodeField[] =  await queryApi.collectRows(query);
         result.map((ArtesianWellNodeField) => {
