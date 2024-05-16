@@ -1,0 +1,469 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.5.0",
+        "title": "Projeto Integrador SmartWater API",
+        "description": "API criada a partir da biblioteca da Express, com o uso da linguagem Typescript, a API foi criada para obter dados de Caixas d'águas, Hidromêtros e Artesians emitidos por sensores",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/license/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "schemes": ["http", "https"],
+    "basePath": "/api/timeseries/v0.5/smartcampusmaua/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "SmartLights",
+            "description": "API for the SmartLights data in the system"
+        },
+        {
+            "name": "WaterTankLevel",
+            "description": "API for the WaterTanksLevel data in the system"
+        },
+        {
+            "name": "Hidrometers",
+            "description": "API for the Hidrometers data in the database"
+        },
+        {
+            "name": "ArtesianWell",
+            "description": "API for the ArtesianWell data in the database"
+        }
+    ],
+    "paths": {
+        "/SmartLights": {
+            "get" : {
+                "tags": [
+                    "SmartLights"
+                ],
+                "parameters": [
+                    {
+                        "name": "interval",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Query parameter that sets the interval of time in Minutes to get the data",
+                        "default": "15",
+                        "required": false
+                    }
+                ],
+                "summary": "Get All Data emited by the Eight sensors installed for the SmartLights",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "SmartLight_1": {
+                                    "data_temperature": [
+                                        {
+                                            "fieldValue": 11,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        }
+                                    ],
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.277,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 2.08,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                },
+                                "..." : {"..." : [{"...": "..."}]},
+                                "SmartLight_8": {
+                                    "rxInfo_latitude_0": [
+                                        {
+                                          "fieldValue": -23.64946,
+                                          "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                          "start": "2024-05-16T10:22:43.901203384Z",
+                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                          "fieldValue": -23.64946,
+                                          "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                          "start": "2024-05-16T10:22:43.901203384Z",
+                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                        }
+                                    ],
+                                    "fCnt": [
+                                        {
+                                          "fieldValue": 135,
+                                          "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                          "start": "2024-05-16T10:22:43.901203384Z",
+                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                          "fieldValue": 135,
+                                          "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                          "start": "2024-05-16T10:22:43.901203384Z",
+                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                        }
+                                    ]
+                                }
+                                    
+                                
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/WaterTanks": {
+            "get" : {
+                "tags": [
+                    "WaterTankLevel"
+                ],
+                "parameters": [
+                    {
+                        "name": "interval",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Query parameter that sets the interval of time in Minutes to get the data",
+                        "default": "15",
+                        "required": false
+                    }
+                ],
+                "summary": "All Data emited by the six sensors for the WaterTanks installed in the university",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "WaterTankLevel_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 2.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 2.977,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                        }
+                                    ],
+                                    "data_distance": [
+                                        {
+                                            "fieldValue": 1404,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 3371,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                },
+                                "..." : {"..." : [{"...": "..."}]},
+                                "WaterTankLevel_7": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 2.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 2.977,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                        }
+                                    ],
+                                    "data_distance": [
+                                        {
+                                            "fieldValue": 1404,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 3371,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Hidrometers": {
+            "get" : {
+                "tags": [
+                    "Hidrometers"
+                ],
+                "parameters": [
+                    {
+                        "name": "interval",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Query parameter that sets the interval of time in Minutes to get the data",
+                        "default": "15",
+                        "required": false
+                    }
+                ],
+                "summary": "Get All Data emited by the six sensors for the Hidrometers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "Hidrometer_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 1.477,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                        }
+                                    ],
+                                    "data_counter": [
+                                        {
+                                            "fieldValue": 8,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 24,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                },
+                                "..." : {"..." : [{"...": "..."}]},
+                                "Hidrometer_6": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 2.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 1.834,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                        }
+                                    ],
+                                    "data_counter": [
+                                        {
+                                            "fieldValue": 16,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 27,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ArtesianWell": {
+            "get" : {
+                "tags": [
+                    "ArtesianWell"
+                ],
+                "parameters": [
+                    {
+                        "name": "interval",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Query parameter that sets the interval of time in Minutes to get the data",
+                        "default": "15",
+                        "required": false
+                    }
+                ],
+                "summary": "Get All Data emited by the sensor installed for the ArtesianWell",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "ArtesianWell_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                          "fieldValue": 3.085,
+                                          "timestamp": "2024-05-16T10:47:28.523315486Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        },
+                                        {
+                                          "fieldValue": 3.05,
+                                          "timestamp": "2024-05-16T10:47:29.522222643Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        }
+                                    ],
+                                    "data_pressure_0": [
+                                        {
+                                          "fieldValue": 768,
+                                          "timestamp": "2024-05-16T10:47:28.523315486Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        },
+                                        {
+                                          "fieldValue": 779,
+                                          "timestamp": "2024-05-16T10:47:29.522222643Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        },
+                                        {
+                                          "fieldValue": 777,
+                                          "timestamp": "2024-05-16T10:47:30.429646086Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        }
+                                    ],
+                                    "data_pressure_1": [
+                                        {
+                                          "fieldValue": 3084,
+                                          "timestamp": "2024-05-16T10:47:28.523315486Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        },
+                                        {
+                                          "fieldValue": 3083,
+                                          "timestamp": "2024-05-16T10:47:29.522222643Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        },
+                                        {
+                                          "fieldValue": 3073,
+                                          "timestamp": "2024-05-16T10:47:30.429646086Z",
+                                          "start": "2024-05-16T10:47:27.698358763Z",
+                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                        }
+                                    ],
+                                    "..." : ["..."]
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "TableNodeField": {
+            "properties": {
+                "result": {
+                    "type": "string"
+                },
+                "_start": {
+                    "type": "string"
+                },
+                "_stop": {
+                    "type": "string"
+                },
+                "_time": { 
+                    "type" : "string"
+                },
+                "_value": {
+                    "type": "number"
+                },
+                "_field": {
+                    "type": "string"
+                },
+                "_measurement": {
+                    "type": "string"
+                },
+                "applicationID": {
+                    "type": "string"
+                },
+                "applicationName": {
+                    "type": "string"
+                },
+                "devEUI": {
+                    "type": "string"
+                },
+                "fPort": {"type": "string"},
+                "host": {"type": "string"},
+                "nodeName": {"type": "string"},
+                "rxInfo_mac_0": {"type": "string"},
+                "rxInfo_mac_1": {"type": "string"},
+                "rxInfo_name_0": {"type": "string"},
+                "rxInfo_name_1": {"type": "string"},
+                "txInfo_adr": {"type": "string"},
+                "txInfo_codeRate": {"type": "string"},
+                "txInfo_dataRate_bandwidth": {"type": "string"},
+                "txInfo_dataRate_modulation": { "type" : "string"}
+            }
+        },
+        "NodeAttributes": {
+            "type": "object",
+            "description": "Nome do Node o qual existe em determinado Entidade, como SmartLight_1, WaterTankLevel_7",
+            "additionalProperties": {
+              "type": "object",
+              "description": "Nome do campo contido na entidade o qual recebe um Array de objetos contendo os valores obtidos, como data_counter",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fieldValue": {
+                      "description": "Valor do campo",
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Timestamp do valor"
+                    },
+                    "start": {
+                      "type": "string",
+                      "description": "Horário de inserção da propriedade no banco"
+                    },
+                    "stop": {
+                      "type": "string",
+                      "description": "Horário de fim da inserção da propriedade no banco"
+                    }
+                  }
+                }
+              }
+            }
+        }
+    }
+}

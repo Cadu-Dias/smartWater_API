@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { InfluxDB } from '@influxdata/influxdb-client';
 import cors from 'cors';
-
+import swaggerUI from 'swagger-ui-express';
+import  * as swaggerDocument from './swagger.json';
 
 const app = express()
 dotenv.config({ path: './.env' }); 
@@ -27,7 +28,7 @@ const hidrometerRoute = require('./controllers/hidrometer.controller')
 const artesianWellRoute = require('./controllers/artesianwell.controller')
 
 
-app.use('/api/timeseries/v0.5/login/user', loginRoute)
+app.use('/api/timeseries/v0.5/smartcampusmaua/login/user', loginRoute)
 
 app.use('/api/timeseries/v0.5/smartcampusmaua/SmartLights', smartLightRoute)
 
@@ -38,5 +39,6 @@ app.use('/api/timeseries/v0.5/smartcampusmaua/Hidrometers', hidrometerRoute)
 app.use('/api/timeseries/v0.5/smartcampusmaua/ArtesianWell', artesianWellRoute)
 
 app.listen(port, () => {
+    app.use('/api/timeseries/v0.5/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
     console.log(`Server is running on port ${port}`);
 });
