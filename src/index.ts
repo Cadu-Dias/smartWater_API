@@ -31,11 +31,11 @@ app.use('/api/timeseries/v0.5/login/user', loginRoute)
 
 app.use('/api/timeseries/v0.5/smartcampusmaua/SmartLights', smartLightRoute)
 
-app.use('/api/timeseries/v0.1/smartcampusmaua/WaterTanks', waterTankRoute)
+app.use('/api/timeseries/v0.5/smartcampusmaua/WaterTanks', waterTankRoute)
 
-app.use('/api/timeseries/v0.1/smartcampusmaua/Hidrometers', hidrometerRoute)
+app.use('/api/timeseries/v0.5/smartcampusmaua/Hidrometers', hidrometerRoute)
 
-app.use('/api/timeseries/v0.1/smartcampusmaua/ArtesianWell', artesianWellRoute)
+app.use('/api/timeseries/v0.5/smartcampusmaua/ArtesianWell', artesianWellRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
