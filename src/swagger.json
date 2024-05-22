@@ -64,7 +64,8 @@
                                             "fieldValue": 11,
                                             "timestamp": "2024-05-16T10:46:02.528679842Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "data_boardVoltage": [
@@ -72,13 +73,15 @@
                                             "fieldValue": 1.277,
                                             "timestamp": "2024-05-16T10:25:09.853963392Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 2.08,
                                             "timestamp": "2024-05-16T10:25:16.850516604Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "...": ["..."]
@@ -90,13 +93,15 @@
                                           "fieldValue": -23.64946,
                                           "timestamp": "2024-05-16T10:25:09.853963392Z",
                                           "start": "2024-05-16T10:22:43.901203384Z",
-                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                          "stop": "2024-05-16T22:22:43.901203384Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": -23.64946,
                                           "timestamp": "2024-05-16T10:25:16.850516604Z",
                                           "start": "2024-05-16T10:22:43.901203384Z",
-                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                          "stop": "2024-05-16T22:22:43.901203384Z",
+                                          "devEUI": 8066
                                         }
                                     ],
                                     "fCnt": [
@@ -104,19 +109,161 @@
                                           "fieldValue": 135,
                                           "timestamp": "2024-05-16T10:25:09.853963392Z",
                                           "start": "2024-05-16T10:22:43.901203384Z",
-                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                          "stop": "2024-05-16T22:22:43.901203384Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 135,
                                           "timestamp": "2024-05-16T10:25:16.850516604Z",
                                           "start": "2024-05-16T10:22:43.901203384Z",
-                                          "stop": "2024-05-16T22:22:43.901203384Z"
+                                          "stop": "2024-05-16T22:22:43.901203384Z",
+                                          "devEUI": 8066
                                         }
                                     ]
                                 }
                                     
                                 
                                 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/SmartLights/deviceName/{nodeName}": {
+            "get" : {
+                "tags": [
+                    "SmartLights"
+                ],
+                "parameters": [
+                    {
+                        "name": "nodeName",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the name of the SmartLight node, like SmartLight_1",
+                        "required": true
+                    }
+                ],
+                "summary": "Get All Data emited by the Eight sensors installed for the SmartLights",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "SmartLight_1": {
+                                    "data_temperature": [
+                                        {
+                                            "fieldValue": 11,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.277,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 2.08,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param nodeName is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with Nodename that you have passed!"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/SmartLights/deviceId/{devEUI}": {
+            "get" : {
+                "tags": [
+                    "SmartLights"
+                ],
+                "parameters": [
+                    {
+                        "name": "devEUI",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the Id of the SmartLight node, 8066",
+                        "required": true
+                    }
+                ],
+                "summary": "Get Data emited filtering with the device ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "SmartLight_1": {
+                                    "data_temperature": [
+                                        {
+                                            "fieldValue": 11,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.277,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 2.08,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param devEUI is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with devEUI that you have passed!"
                             }
                         }
                     }
@@ -150,13 +297,15 @@
                                             "fieldValue": 2.126,
                                             "timestamp": "2024-05-16T10:46:02.528679842Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 2.977,
                                             "timestamp": "2024-05-16T10:49:02.528679842Z",
                                             "start": "2024-05-16T10:22:44.901203384Z",
-                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "data_distance": [
@@ -164,13 +313,15 @@
                                             "fieldValue": 1404,
                                             "timestamp": "2024-05-16T10:25:09.853963392Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 3371,
                                             "timestamp": "2024-05-16T10:25:16.850516604Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "...": ["..."]
@@ -182,13 +333,15 @@
                                             "fieldValue": 2.126,
                                             "timestamp": "2024-05-16T10:46:02.528679842Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 2.977,
                                             "timestamp": "2024-05-16T10:49:02.528679842Z",
                                             "start": "2024-05-16T10:22:44.901203384Z",
-                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "data_distance": [
@@ -196,16 +349,172 @@
                                             "fieldValue": 1404,
                                             "timestamp": "2024-05-16T10:25:09.853963392Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 3371,
                                             "timestamp": "2024-05-16T10:25:16.850516604Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ]
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/WaterTanks/deviceId/{devEUI}": {
+            "get" : {
+                "tags": [
+                    "WaterTankLevel"
+                ],
+                "parameters": [
+                    {
+                        "name": "devEUI",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the Id of the WaterTank node, 4025",
+                        "required": true
+                    }
+                ],
+                "summary": "Get Data emited filtering with the device ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "WaterTankLevel_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 2.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 2.977,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "data_distance": [
+                                        {
+                                            "fieldValue": 1404,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 3371,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param devEUI is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with devEUI that you have passed!"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/WaterTanks/deviceName/{nodeName}": {
+            "get" : {
+                "tags": [
+                    "WaterTankLevel"
+                ],
+                "parameters": [
+                    {
+                        "name": "nodeName",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the name of the SmartLight node, like WaterTankLevel_1",
+                        "required": true
+                    }
+                ],
+                "summary": "Get Data emited filtering with the device ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "WaterTankLevel_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 2.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 2.977,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "data_distance": [
+                                        {
+                                            "fieldValue": 1404,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 3371,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param devEUI is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with devEUI that you have passed!"
                             }
                         }
                     }
@@ -271,13 +580,15 @@
                                             "fieldValue": 2.126,
                                             "timestamp": "2024-05-16T10:46:02.528679842Z",
                                             "start": "2024-05-16T10:22:43.901203384Z",
-                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 1.834,
                                             "timestamp": "2024-05-16T10:49:02.528679842Z",
                                             "start": "2024-05-16T10:22:44.901203384Z",
-                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ],
                                     "data_counter": [
@@ -285,16 +596,170 @@
                                             "fieldValue": 16,
                                             "timestamp": "2024-05-16T10:25:09.853963392Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:41.901203384Z"
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
                                         },
                                         {
                                             "fieldValue": 27,
                                             "timestamp": "2024-05-16T10:25:16.850516604Z",
                                             "start": "2024-05-16T10:22:41.901203384Z",
-                                            "stop": "2024-05-16T22:22:42.901203384Z"
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
                                         }
                                     ]
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Hidrometers/deviceName/{nodeName}": {
+            "get" : {
+                "tags": [
+                    "Hidrometers"
+                ],
+                "parameters": [
+                    {
+                        "name": "nodeName",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the name of the Hidrometer node, like Hidrometer_1",
+                        "required": true
+                    }
+                ],
+                "summary": "Get All Data emited by the Eight sensors installed for the Hidrometers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "Hidrometer_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z"
+                                        },
+                                        {
+                                            "fieldValue": 1.477,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z"
+                                        }
+                                    ],
+                                    "data_counter": [
+                                        {
+                                            "fieldValue": 8,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 24,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param nodeName is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with Nodename that you have passed!"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Hidrometers/deviceId/{devEUI}": {
+            "get" : {
+                "tags": [
+                    "Hidrometers"
+                ],
+                "parameters": [
+                    {
+                        "name": "devEUI",
+                        "in": "path",
+                        "type": "string",
+                        "description": "Param that receives the Id of the Hidrometer node, 2148",
+                        "required": true
+                    }
+                ],
+                "summary": "Get Data emited filtering with the device ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "example": {
+                                "Hidrometer_1": {
+                                    "data_boardVoltage": [
+                                        {
+                                            "fieldValue": 1.126,
+                                            "timestamp": "2024-05-16T10:46:02.528679842Z",
+                                            "start": "2024-05-16T10:22:43.901203384Z",
+                                            "stop": "2024-05-16T22:22:43.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 1.477,
+                                            "timestamp": "2024-05-16T10:49:02.528679842Z",
+                                            "start": "2024-05-16T10:22:44.901203384Z",
+                                            "stop": "2024-05-16T22:22:44.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "data_counter": [
+                                        {
+                                            "fieldValue": 8,
+                                            "timestamp": "2024-05-16T10:25:09.853963392Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:41.901203384Z",
+                                            "devEUI": 8066
+                                        },
+                                        {
+                                            "fieldValue": 24,
+                                            "timestamp": "2024-05-16T10:25:16.850516604Z",
+                                            "start": "2024-05-16T10:22:41.901203384Z",
+                                            "stop": "2024-05-16T22:22:42.901203384Z",
+                                            "devEUI": 8066
+                                        }
+                                    ],
+                                    "...": ["..."]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "example": {
+                                "message": "The Route param devEUI is missing!"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "example": {
+                                "message": "There is not a value with devEUI that you have passed!"
                             }
                         }
                     }
@@ -328,13 +793,15 @@
                                           "fieldValue": 3.085,
                                           "timestamp": "2024-05-16T10:47:28.523315486Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 3.05,
                                           "timestamp": "2024-05-16T10:47:29.522222643Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         }
                                     ],
                                     "data_pressure_0": [
@@ -342,19 +809,22 @@
                                           "fieldValue": 768,
                                           "timestamp": "2024-05-16T10:47:28.523315486Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 779,
                                           "timestamp": "2024-05-16T10:47:29.522222643Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 777,
                                           "timestamp": "2024-05-16T10:47:30.429646086Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         }
                                     ],
                                     "data_pressure_1": [
@@ -362,19 +832,22 @@
                                           "fieldValue": 3084,
                                           "timestamp": "2024-05-16T10:47:28.523315486Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 3083,
                                           "timestamp": "2024-05-16T10:47:29.522222643Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         },
                                         {
                                           "fieldValue": 3073,
                                           "timestamp": "2024-05-16T10:47:30.429646086Z",
                                           "start": "2024-05-16T10:47:27.698358763Z",
-                                          "stop": "2024-05-16T22:47:27.698358763Z"
+                                          "stop": "2024-05-16T22:47:27.698358763Z",
+                                          "devEUI": 8066
                                         }
                                     ],
                                     "..." : ["..."]
@@ -459,6 +932,10 @@
                     "stop": {
                       "type": "string",
                       "description": "Horário de fim da inserção da propriedade no banco"
+                    },
+                    "devEUI": {
+                        "type": "string",
+                        "description": "Identificador do dispositivo sensorial"
                     }
                   }
                 }

@@ -12,7 +12,8 @@ export function generateTableObject(result :TableNodeField[]) {
             fieldValue: nodeField._value,
             timestamp: nodeField._time,
             start: nodeField._start,
-            stop: nodeField._stop
+            stop: nodeField._stop,
+            devEUI: nodeField.devEUI
         }
         if(!tableByNode[nodeField.nodeName]) {
             tableByNode[nodeField.nodeName] = {}

@@ -59,11 +59,11 @@ router.get("/deviceId/:devEUI", async (req : Request, res : Response) =>  {
 
         const devEUI = req.params.devEUI
 
-        if(devEUI) return res.status(400).json({ message: "You need to insert the Nodename in the route"})
+        if(devEUI) return res.status(400).json({ message: "You need to insert the devEUI in the route"})
 
         getByDeviceId('SmartLight', req.params.nodeName).then((smartLightObject) => {
             if(!smartLightObject[devEUI]) {
-                return res.send(404).json({ message: "There is not a value with name that you have passed" })
+                return res.send(404).json({ message: "There is not a value with Id that you have passed" })
             }
             res.status(200)
             res.send(smartLightObject)
