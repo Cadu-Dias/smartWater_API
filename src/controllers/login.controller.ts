@@ -17,13 +17,15 @@ router.post('/', (req: Request, res: Response) => {
     }
 
     const users : User[] =  db.users
-    if(!users.find(user => user.username === username && user.password === password)) {
+
+    const user = users.find(user => user.username === username && user.password === password)
+    if(!user) {
         return res.status(401).json({
             message: "This User is Unauthorized"
         })
     }
 
-    const accessToken = jwt.sign({ "username": username }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: "1h" })
+    const accessToken = jwt.sign({ "username": username, "role":  user.role }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: "1h" })
     res.json({
         token: accessToken
     })

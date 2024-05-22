@@ -1,13 +1,7 @@
 import express, { Request, Response } from 'express'
-import { NodeAtributes, TableNodeField } from '../core/models/interface'
-import { generateTableObject } from "../core/functions/function";
-import { client } from '..';
-import { flux } from '@influxdata/influxdb-client';
+import { getAllNodes } from "../core/functions/function";
 
 const router = express.Router()
-const bucket : string = process.env.BUCKET!
-const org : string = process.env.ORGANIZATION!
-
 
 router.get("/", /*ensureToken*/ async (req : Request, res : Response) =>  {
 
@@ -21,16 +15,11 @@ router.get("/", /*ensureToken*/ async (req : Request, res : Response) =>  {
         let interval = 60
         if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
-        let artesianByNode : NodeAtributes = {}
-        const queryApi = client.getQueryApi(org);
-    
-        const query = flux`from(bucket: "${bucket}")
-        |> range(start: -${interval}m) 
-        |> filter(fn: (r) => r._measurement == "ArtesianWell")
-        |> limit(n: 10)`
-        const result : TableNodeField[] =  await queryApi.collectRows(query);
+        let limit = 0
+        if(req.query.interval) limit = parseInt(req.query.limit as string)
+       
+        const artesianByNode = getAllNodes('ArtesianWell', interval, limit)
         
-        artesianByNode = generateTableObject(result)
         res.status(200)
         res.send(artesianByNode)
     //})

@@ -34,6 +34,7 @@ export interface TableNodeField {
 }
 
 export interface User {
-    username: string
-    password: string
+    username: string;
+    password: string;
+    role: string
 }
