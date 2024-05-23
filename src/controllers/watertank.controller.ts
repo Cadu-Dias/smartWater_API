@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import { getAllNodes, getByDeviceId, getByDeviceName } from "../core/functions/function";
+import { NodeAtributes } from '../core/models/interface';
 
 const router = express.Router()
 
@@ -11,16 +12,17 @@ router.get("/", async (req : Request, res : Response) =>  {
                 error: err
             })
         }*/
-        let interval = 60
+        let interval = 15
         if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let limit = 0
-        if(req.query.interval) limit = parseInt(req.query.limit as string)
+        if(req.query.limit) limit = parseInt(req.query.limit as string)
        
-        getAllNodes('WaterTankLavel', interval, limit).then((waterTankObject) => {
-            res.status(200)
-            res.send(waterTankObject)
-        })
+        
+        const waterTanksNodes = getAllNodes('WaterTankLavel', interval, limit)
+
+        res.status(200);
+        res.send(waterTanksNodes!)
         
     //})
 })
@@ -34,8 +36,7 @@ router.get("/deviceName/:nodeName", async (req : Request, res : Response) =>  {
             })
         }*/
         const nodename = req.params.nodeName
-
-        if(nodename) return res.status(400).json({ message: "You need to insert the Nodename in the route"})
+        if(!nodename) return res.status(400).json({ message: "You need to insert the Nodename in the route"})
 
         getByDeviceName('WaterTankLavel', req.params.nodeName).then((waterTanksObject) => {
             if(!waterTanksObject[nodename]) {
@@ -59,7 +60,7 @@ router.get("/deviceId/:devEUI", async (req : Request, res : Response) =>  {
 
         const devEUI = req.params.devEUI
 
-        if(devEUI) return res.status(400).json({ message: "You need to insert the devEUI in the route"})
+        if(!devEUI) return res.status(400).json({ message: "You need to insert the devEUI in the route"})
 
         getByDeviceId('WaterTankLavel', req.params.nodeName).then((waterTanksObject) => {
             if(!waterTanksObject[devEUI]) {

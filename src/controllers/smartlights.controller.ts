@@ -16,7 +16,7 @@ router.get("/",  /*ensureToken*/ async (req : Request, res : Response) =>  {
         if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let limit = 0
-        if(req.query.interval) limit = parseInt(req.query.limit as string)
+        if(req.query.limit) limit = parseInt(req.query.limit as string)
            
         getAllNodes('SmartLight', interval, limit).then((smartLightObject) => {
             res.status(200)

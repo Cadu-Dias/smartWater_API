@@ -17,7 +17,7 @@ router.get("/", /*ensureToken*/ async (req : Request, res : Response) =>  {
         if(req.query.interval) interval = parseInt(req.query.interval as string) 
 
         let limit = 0
-        if(req.query.interval) limit = parseInt(req.query.limit as string)
+        if(req.query.limit) limit = parseInt(req.query.limit as string)
        
         getAllNodes('Hidrometer', interval, limit).then((hidrometerObject) => {
             res.status(200)
@@ -36,7 +36,7 @@ router.get("/deviceName/:nodeName", async (req : Request, res : Response) =>  {
         }*/
         const nodename = req.params.nodeName
 
-        if(nodename) return res.status(400).json({ message: "You need to insert the Nodename in the route"})
+        if(!nodename) return res.status(400).json({ message: "You need to insert the Nodename in the route"})
 
         getByDeviceName('SmartLight', req.params.nodeName).then((hidrometerObject) => {
             if(!hidrometerObject[nodename]) {
@@ -60,7 +60,7 @@ router.get("/deviceId/:devEUI", async (req : Request, res : Response) =>  {
 
         const devEUI = req.params.devEUI
 
-        if(devEUI) return res.status(400).json({ message: "You need to insert the devEUI in the route"})
+        if(!devEUI) return res.status(400).json({ message: "You need to insert the devEUI in the route"})
 
         getByDeviceId('SmartLight', req.params.nodeName).then((hidrometerObject) => {
             if(!hidrometerObject[devEUI]) {

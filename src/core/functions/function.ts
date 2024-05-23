@@ -43,11 +43,8 @@ export async function getAllNodes(tableName: string, interval: number, limit: nu
         |> filter(fn: (r) => r._measurement == "${tableName}")
         |> limit(n: ${limit})`
     }
-
     const result : TableNodeField[] = await queryApi.collectRows(query);
-
     let nodeAtributes : NodeAtributes = generateTableObject(result)
-
     return nodeAtributes
 }
 
