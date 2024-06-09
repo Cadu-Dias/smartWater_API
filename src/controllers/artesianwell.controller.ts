@@ -18,10 +18,10 @@ router.get("/", /*ensureToken*/ async (req : Request, res : Response) =>  {
         let limit = 0
         if(req.query.limit) limit = parseInt(req.query.limit as string)
        
-        const artesianByNode = getAllNodes('ArtesianWell', interval, limit)
-        
-        res.status(200)
-        res.send(artesianByNode)
+        getAllNodes('ArtesianWell', interval, limit).then((artesianWellObject) => {
+            res.status(200)
+            res.send(artesianWellObject)
+        })
     //})
 })
 

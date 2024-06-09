@@ -19,10 +19,10 @@ router.get("/", async (req : Request, res : Response) =>  {
         if(req.query.limit) limit = parseInt(req.query.limit as string)
        
         
-        const waterTanksNodes = getAllNodes('WaterTankLavel', interval, limit)
-
-        res.status(200);
-        res.send(waterTanksNodes!)
+        getAllNodes('WaterTankLavel', interval, limit).then((waterTankLevelObject) => {
+            res.status(200)
+            res.send(waterTankLevelObject)
+        })
         
     //})
 })
